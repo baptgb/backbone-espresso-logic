@@ -1,0 +1,7 @@
+{
+    "name": "backbone.espressologic",
+    "version": "0.1",
+    "dependencies": {
+        "backbone": "master"
+    }
+}
