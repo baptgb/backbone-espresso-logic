@@ -12,7 +12,7 @@ Licence: MIT (see LICENCE file)
 
 ```javascript
 // Create the model and set the urlRoot for example
-var MyModel = Backbone.EsspressoLogic.Model.extend({
+var MyModel = Backbone.EspressoLogic.Model.extend({
     myProp: 'myPropValue',
     urlRoot: 'https://api.com/my/resource'
 });
