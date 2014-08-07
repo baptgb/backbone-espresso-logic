@@ -10,7 +10,7 @@ Licence: MIT (see LICENCE file)
 
 ## API Filter usage : ##
 
-```
+```javascript
 // Create the model and set the urlRoot for example
 var MyModel = Backbone.EsspressoLogic.Model.extend({
     myProp: 'myPropValue',
