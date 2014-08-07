@@ -1,7 +1,29 @@
 {
-    "name": "backbone.espressologic",
-    "version": "0.1",
-    "dependencies": {
-        "backbone": "master"
-    }
+  "name": "backbone.espressologic",
+  "version": "0.1",
+  "dependencies": {
+    "backbone": "master"
+  },
+  "main": "backbone.espressologic.js",
+  "homepage": "https://github.com/alchm/backbone-espresso-logic",
+  "authors": [
+    "Baptiste Gouby <baptiste.gouby@gmail.com>"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "backbone",
+    "espresso",
+    "logic",
+    "model"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
