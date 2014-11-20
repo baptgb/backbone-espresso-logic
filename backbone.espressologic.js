@@ -36,6 +36,10 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             } else {
                 return response;
             }
+        },
+        filter: function(filterName, filterValue) {
+            this.apiFilter = "?filter="+filterName+"='"+filterValue+"'";
+            return this;
         }
     });
 
@@ -51,6 +55,10 @@ Backbone.EspressoLogic = (function(Backbone, _) {
                 url += this.apiFilter;
             }
             return url;
+        },
+        filter: function(filterName, filterValue) {
+            this.apiFilter = "?filter="+filterName+"='"+filterValue+"'";
+            return this;
         }
     });
 
