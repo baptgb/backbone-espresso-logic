@@ -37,7 +37,7 @@ Backbone.EspressoLogic = (function(Backbone, _) {
                 return response;
             }
         },
-        filter: function(filterName, filterValue) {
+        filterBy: function(filterName, filterValue) {
             this.apiFilter = "?filter="+filterName+"='"+filterValue+"'";
             return this;
         }
@@ -56,7 +56,7 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             }
             return url;
         },
-        filter: function(filterName, filterValue) {
+        filterBy: function(filterName, filterValue) {
             this.apiFilter = "?filter="+filterName+"='"+filterValue+"'";
             return this;
         }
