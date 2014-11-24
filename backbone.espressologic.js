@@ -50,7 +50,7 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             }
         },
         url: function() {
-            var url = Backbone.Model.prototype.url.apply(this);
+            var url = this.urlRoot;
             if (this.apiFilter) {
                 url += this.apiFilter;
             }
