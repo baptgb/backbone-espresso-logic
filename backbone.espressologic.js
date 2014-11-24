@@ -19,7 +19,7 @@ Backbone.EspressoLogic = (function(Backbone, _) {
          * Append the filter to the URL
          */
         url: function() {
-            var url = this.urlRoot;
+            var url = Backbone.Model.prototype.url.apply(this);
             if (this.apiFilter) {
                 url += this.apiFilter;
             }
@@ -29,8 +29,8 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             // If the response has a status code 201 (Created) or 200 (OK), the Model data object will be the only item in the 'txsummary' array
             if (response.statusCode && (response.statusCode === 201 || response.statusCode === 200)) {
                 return response.txsummary[0];
-            // Espresso Logic returns an array even if we GET a single entity like '[...]/user/1
-            // If the array length is only 1, it returns object
+                // Espresso Logic returns an array even if we GET a single entity like '[...]/user/1
+                // If the array length is only 1, it returns object
             } else if (response.length === 1) {
                 return response[0];
             } else {
@@ -50,7 +50,7 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             }
         },
         url: function() {
-            var url = this.urlRoot;
+            var url = Backbone.Model.prototype.url.apply(this);
             if (this.apiFilter) {
                 url += this.apiFilter;
             }
