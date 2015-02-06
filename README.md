@@ -1,6 +1,8 @@
 backbone-espresso-logic
 =======================
 
+/!\ This README is currently out-dated /!\
+
 ## About : ##
 
 backbone-espresso-logic provides a simple way to adapt your Backbone.Model to Espresso Logic API requests and responses

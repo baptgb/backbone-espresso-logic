@@ -1,18 +1,22 @@
 /**
  * Created by Baptiste Gouby on 2014-07-29.
  */
+var EspressoLogic = {};
+
 Backbone.EspressoLogic = (function(Backbone, _) {
 
-    var EspressoLogic = {};
+    EspressoLogic.configuration = {
+        metadataName: "@api_metadata"
+    };
+
     EspressoLogic.Model = Backbone.Model.extend({
         /**
          * Using Espresso Logic, we can provide SQL-like filters to the requested URL
          * We just have to set a filter in the options when creating a model
          */
         initialize: function(attr, opts) {
-            if (opts && opts.apiFilter) {
-                this.apiFilter = opts.apiFilter;
-            }
+            if (opts && opts.apiFilter) this.apiFilter = opts.apiFilter;
+            if (attr && attr.modelName) this.modelName = attr.modelName;
         },
         /**
          * The URL used to make the request is created.
@@ -28,7 +32,12 @@ Backbone.EspressoLogic = (function(Backbone, _) {
         parse: function(response) {
             // If the response has a status code 201 (Created) or 200 (OK), the Model data object will be the only item in the 'txsummary' array
             if (response.statusCode && (response.statusCode === 201 || response.statusCode === 200)) {
-                return response.txsummary[0];
+                var metadataName    = EspressoLogic.configuration.metadataName,
+                    modelName       = this.modelName.toLowerCase();
+                return _.find(response.txsummary, function(entity){
+                    var href = entity[metadataName].href;
+                    return href.indexOf(modelName) != -1;
+                });
                 // Espresso Logic returns an array even if we GET a single entity like '[...]/user/1
                 // If the array length is only 1, it returns object
             } else if (response.length === 1) {
@@ -66,3 +75,10 @@ Backbone.EspressoLogic = (function(Backbone, _) {
 
 })
 (Backbone, _);
+
+module.exports = function(configuration) {
+    if (_.isObject(configuration)) {
+        var baseConf = EspressoLogic.configuration;
+        EspressoLogic.configuration = _.merge(baseConf, configuration);
+    }
+};
