@@ -41,6 +41,9 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             // Set the `apiFilter` property if provided
             if (opts && opts.apiFilter) this.apiFilter = opts.apiFilter;
 
+            // Define the additional parameters to append to the url
+            this.parameters = "";
+
             // Inherit from Backbone.Model
             Backbone.Model.call(this, attr, opts);
         },
@@ -51,7 +54,11 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             var url = Backbone.Model.prototype.url.apply(this);
             if (this.apiFilter) {
                 url += this.apiFilter;
+                if (!_.isEmpty(this.parameters)) {
+                    url += '&';
+                }
             }
+            url += this.parameters;
             return url;
         },
 
@@ -88,6 +95,16 @@ Backbone.EspressoLogic = (function(Backbone, _) {
         // Allows to set a "filter" suffix to the requested url (see `url` method)
         filterBy: function(filterName, filterValue) {
             this.apiFilter = "?filter="+filterName+"='"+filterValue+"'";
+            return this;
+        },
+
+        // Add an optional parameter to the request url
+        addParameter: function(paramName, paramValue) {
+            // for the first parameter, there is no need to add an "&"
+            if (!_.isEmpty(this.parameters)) {
+                this.parameters += "&";
+            }
+            this.parameters += (paramName + "=" + paramValue);
             return this;
         }
     });
