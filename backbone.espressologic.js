@@ -107,6 +107,7 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             this.parameters += (paramName + "=" + paramValue);
             return this;
         }
+
     });
 
     EspressoLogic.Collection = Backbone.Collection.extend({
@@ -128,6 +129,9 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             // Define the `apiFilter`
             if (opts && opts.apiFilter) this.apiFilter = opts.apiFilter;
 
+            // Define the additional parameters to append to the url
+            this.parameters = "";
+
             // Inherit from Backbone.Collection
             Backbone.Collection.call(this, models, opts);
         },
@@ -136,12 +140,25 @@ Backbone.EspressoLogic = (function(Backbone, _) {
             var url = this.urlRoot;
             if (this.apiFilter) {
                 url += this.apiFilter;
+                if (!_.isEmpty(this.parameters)) {
+                    url += '&';
+                }
             }
             return url;
         },
 
         filterBy: function(filterName, filterValue) {
             this.apiFilter = "?filter="+filterName+"='"+filterValue+"'";
+            return this;
+        },
+
+        // Add an optional parameter to the request url
+        addParameter: function(paramName, paramValue) {
+            // for the first parameter, there is no need to add an "&"
+            if (!_.isEmpty(this.parameters)) {
+                this.parameters += "&";
+            }
+            this.parameters += (paramName + "=" + paramValue);
             return this;
         }
 
